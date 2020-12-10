@@ -3,23 +3,51 @@ package com.cg.spring.mobileapp;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-@Component
-public class AirtelSim implements Sim {
+@Component("airtel")
+@Scope("singleton")
+@Lazy
+public class AirtelSim implements Sim, InitializingBean, DisposableBean {
 
 	@Value("${airtel.browsingSpeed}")
 	private float browsingSpeed;
 	@Value("${airtel.callingCharges}")
 	private float callingCharges;
+	@Value("#{${airtel.supportedNetworks}}")
 	private Map<String,Integer> supportedNetworks;
 	
 	public AirtelSim() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("Airtel Sim Initialized");
+	}
 	
+//	@PostConstruct
+//	public void init() {
+//		System.out.println("Init Method Executed");
+//	}
 	
+	@Override
+	public void destroy() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@PreDestroy
+	public void destoyMethod() {
+		
+	}
 	
 
 

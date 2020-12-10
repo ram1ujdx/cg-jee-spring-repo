@@ -14,12 +14,15 @@ public class App {
 		
 		ApplicationContext context=new AnnotationConfigApplicationContext(AppConfig.class);
 		
-		Mobile m=context.getBean("mobile",Mobile.class);
+		Mobile m=(Mobile)context.getBean("mobile");
 		
 		m.browse();
 		m.makeCall();
-		//m.showSupportedNetworks();
+		m.showSupportedNetworks();
 
+		Mobile m1=(Mobile)context.getBean("mobile");
+		Mobile m2=(Mobile)context.getBean("mobile");
+		
 	}
 
 }

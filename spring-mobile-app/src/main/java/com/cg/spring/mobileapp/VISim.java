@@ -3,20 +3,29 @@ package com.cg.spring.mobileapp;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-@Component
+@Component("vi")
+@Scope("singleton")
+@Lazy
 public class VISim implements Sim{
 
 	@Value("${vi.browsingSpeed}")
 	private float browsingSpeed;
 	@Value("${vi.callingCharges}")
 	private float callingCharges;
-	
+	@Value("#{${vi.supportedNetworks}}")
 	private Map<String,Integer> supportedNetworks;
 	
 	
-	
+	@PostConstruct
+	public void init() {
+		System.out.println("VI Sim Created");
+	}
 	
 
 
